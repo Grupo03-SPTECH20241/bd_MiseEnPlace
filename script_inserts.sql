@@ -55,8 +55,8 @@ VALUES
 -- Tabela `mydb`.`pedido`
 INSERT INTO pedido (dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
 VALUES 
-    ('2024-04-30', '50.00', 'P', '20.00', 1, 1, 1),
-    ('2024-04-29', '100.00', 'A', '30.00', 2, 2, 2);
+    (NOW(), '50.00', 'P', '20.00', 1, 1, 1),
+    ('2024-05-12', '100.00', 'A', '30.00', 2, 2, 2);
    
 -- Tabela `mydb`.`metas`
 INSERT INTO metas (descricao, dt_termino,  dt_inicio) 
