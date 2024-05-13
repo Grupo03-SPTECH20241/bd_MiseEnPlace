@@ -134,3 +134,15 @@ CREATE TABLE usuario(
     senha VARCHAR(45),
     logado INT
 );
+
+CREATE TABLE produto_pedido(
+    id_produto_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    observacoes VARCHAR(45),
+    qt_produto INT,
+    fk_produto INT,
+    fk_personalizacao INT,
+    fk_pedido INT,
+    Foreign Key (fk_produto) REFERENCES produto(id_produto),
+    Foreign Key (fk_personalizacao) REFERENCES personalizacao(id_personalizacao),
+    Foreign Key (fk_pedido) REFERENCES pedido(id_pedido)
+);
