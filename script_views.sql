@@ -43,6 +43,7 @@ GROUP BY
 ORDER BY
 	DATE(p.dt_pedido);
 
+SELECT * FROM pedido;
 
 -- view mais vendidos por tipo de produto
 CREATE OR REPLACE VIEW vw_tipo_produto
