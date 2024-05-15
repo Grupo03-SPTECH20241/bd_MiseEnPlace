@@ -40,7 +40,7 @@ END
 $
 
 delimiter $
-	CALL pc_insercao_pedido('Aniversário',1,2,3,'Sem açúcar',56,1,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
+	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,1,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
 $
 
 DELIMITER $
@@ -54,24 +54,3 @@ $
 delimiter $
 DROP PROCEDURE pc_insercao_pedido;
 $
-
-/* 
-INSERT INTO personalizacao (tema, fk_recheio, fk_massa, fk_cobertura) 
-VALUES 
-    ('Aniversário', 1, 2, 3),
-    ('Casamento', 2, 1, 2); 
-    */
-/* 
-    INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao, fk_pedido) 
-VALUES 
-    ('Sem açúcar',1, 1, 1, 1),
-    ('Com recheio duplo', 2, 2, 2, 2);
- */
-
- /* 
- INSERT INTO pedido (dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
-VALUES 
-    (NOW(), '50.00', 'P', '20.00', 1, 1, 1),
-    ('2024-05-12', '100.00', 'A', '30.00', 2, 2, 2);
-
-  */
