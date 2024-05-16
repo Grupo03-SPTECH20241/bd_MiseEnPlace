@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS mise_en_plass;
-CREATE DATABASE mise_en_plass;
-USE mise_en_plass;
+DROP DATABASE IF EXISTS mise_en_place;
+CREATE DATABASE mise_en_place;
+USE mise_en_place;
 
 -- Tabela tipo produto
 CREATE TABLE tipo_produto(

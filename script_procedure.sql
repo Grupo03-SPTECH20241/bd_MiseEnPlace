@@ -44,7 +44,7 @@ delimiter $
 $
 
 DELIMITER $
-DROP PROCEDURE pc_insercao_pedido;
+	DROP PROCEDURE pc_insercao_pedido;
 $
 
 DELIMITER $

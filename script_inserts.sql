@@ -1,4 +1,4 @@
-USE mise_en_plass;
+USE mise_en_place;
 -- Tabela `mydb`.`recheio`
 INSERT INTO recheio ( nome, preco) 
 VALUES 

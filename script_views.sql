@@ -1,4 +1,4 @@
-use mise_en_plass;
+use mise_en_place;
 -- view mais vendidos por mes
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_mes
 AS

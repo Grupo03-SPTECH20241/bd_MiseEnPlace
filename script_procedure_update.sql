@@ -18,9 +18,27 @@ DELIMITER $
         fk_cliente INT,
         fk_forma_pagamento INT
     ) BEGIN 
-        UPDATE personalizacao SET tema = tema, fk_recheio = fk_recheio, fk_massa = fk_massa, fk_cobertura = fk_cobertura WHERE id_personalizacao = fk_personalizacao;
-        UPDATE pedido SET dt_pedido = dt_pedido, vl_pedido = vl_pedido, status = status, valor_sinal = valor_sinal, fk_forma_entrega = fk_forma_entrega, fk_cliente = fk_cliente, fk_forma_pagamento = fk_forma_pagamento WHERE id_pedido = fk_pedido;
-        UPDATE produto_pedido SET observacoes = observacoes, qt_produto = qt_produto, fk_produto = fk_produto WHERE fk_pedido = fk_pedido;
+        UPDATE personalizacao 
+					 SET tema = tema, 
+					 fk_recheio = fk_recheio, 
+					 fk_massa = fk_massa, 
+					 fk_cobertura = 
+					 fk_cobertura 
+					 WHERE id_personalizacao = fk_personalizacao;
+        UPDATE pedido 
+					 SET dt_pedido = dt_pedido, 
+                     vl_pedido = vl_pedido, 
+                     status = status, 
+                     valor_sinal = valor_sinal, 
+                     fk_forma_entrega = fk_forma_entrega, 
+                     fk_cliente = fk_cliente, 
+                     fk_forma_pagamento = fk_forma_pagamento 
+                     WHERE id_pedido = fk_pedido;
+        UPDATE produto_pedido 
+					SET observacoes = observacoes, 
+                    qt_produto = qt_produto, 
+                    fk_produto = fk_produto 
+                    WHERE fk_pedido = fk_pedido;
     END
 $
 
