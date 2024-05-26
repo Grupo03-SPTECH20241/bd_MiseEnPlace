@@ -1,4 +1,4 @@
-USE mise_en_place;
+USE bd_mise_en_place;
 -- Tabela `mydb`.`recheio`
 INSERT INTO recheio ( nome, preco) 
 VALUES 
@@ -66,8 +66,8 @@ VALUES
 -- Tabela `mydb`.`usuario`
 INSERT INTO usuario (nome,login, senha,logado) 
 VALUES 
-    ('João','joao@example.com', 'senha123', 1),
-    ('Maria','maria@example.com', 'senha456', 0);
+    ('João','joao@example.com', 'senha123'),
+    ('Maria','maria@example.com', 'senha456');
     DESC usuario;
 
 -- Tabela `mydb`.`personalizacao`

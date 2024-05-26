@@ -52,4 +52,3 @@ DELIMITER $
 	DROP PROCEDURE pc_atualiza_pedido;
 $
 
-select * from pedido WHERE id_pedido = 1;

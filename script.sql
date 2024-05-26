@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS mise_en_place;
-CREATE DATABASE mise_en_place;
-USE mise_en_place;
+DROP DATABASE IF EXISTS bd_mise_en_place;
+CREATE DATABASE bd_mise_en_place;
+USE bd_mise_en_place;
 
 -- Tabela tipo produto
 CREATE TABLE tipo_produto(
@@ -130,9 +130,10 @@ CREATE TABLE metas(
 CREATE TABLE usuario(
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
+    cnpj CHAR(18),
+    logo VARCHAR(500),
     login VARCHAR(45),
-    senha VARCHAR(45),
-    logado INT
+    senha VARCHAR(45)
 );
 
 CREATE TABLE produto_pedido(
