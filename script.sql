@@ -132,8 +132,8 @@ CREATE TABLE usuario(
     nome VARCHAR(45),
     cnpj CHAR(18),
     logo VARCHAR(500),
-    login VARCHAR(45),
-    senha VARCHAR(45)
+    email VARCHAR(45),
+    senha VARCHAR(500)
 );
 
 CREATE TABLE produto_pedido(
@@ -147,3 +147,4 @@ CREATE TABLE produto_pedido(
     Foreign Key (fk_personalizacao) REFERENCES personalizacao(id_personalizacao),
     Foreign Key (fk_pedido) REFERENCES pedido(id_pedido)
 );
+

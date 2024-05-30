@@ -64,7 +64,7 @@ VALUES
     ( 'Meta de Vendas', '2024-12-31',  '2024-01-01');
 
 -- Tabela `mydb`.`usuario`
-INSERT INTO usuario (nome,login, senha,logado) 
+INSERT INTO usuario (nome,email, senha) 
 VALUES 
     ('João','joao@example.com', 'senha123'),
     ('Maria','maria@example.com', 'senha456');
