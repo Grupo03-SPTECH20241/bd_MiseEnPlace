@@ -49,8 +49,17 @@ $
 
 DELIMITER $
 	SELECT * FROM pedido JOIN produto_pedido ON pedido.id_pedido = produto_pedido.fk_pedido;
+    SELECT * FROM forma_pagamento;
+    SELECT * FROM cliente;
+    SELECT * FROM pedido;
+    
 $
 
 delimiter $
 DROP PROCEDURE pc_insercao_pedido;
+$
+
+use bd_mise_en_place;
+delimiter $
+	
 $

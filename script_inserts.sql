@@ -100,3 +100,8 @@ INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao
 VALUES 
     ('Sem açúcar',1, 1, 1, 1),
     ('Com recheio duplo', 2, 2, 2, 2);
+    
+    
+    
+use bd_mise_en_place;
+Select * from usuario;
