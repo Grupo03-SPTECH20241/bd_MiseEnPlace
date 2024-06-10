@@ -40,7 +40,7 @@ END
 $
 
 delimiter $
-	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,1,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
+	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
 $
 
 DELIMITER $

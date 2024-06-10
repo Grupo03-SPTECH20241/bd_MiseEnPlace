@@ -14,6 +14,8 @@ GROUP BY
 
 SELECT * FROM vw_quantidade_vendidos_mes;
 
+UPDATE metas SET valor = 2000 WHERE id_meta = 1;
+
 -- view mais vendidos por dia 
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_dia
 AS
@@ -71,6 +73,7 @@ SELECT * FROM vw_tipo_produto;
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido 
 AS
 SELECT 
+	pr.nome 'nome',
     MONTH(p.dt_pedido) 'mes',
     SUM(pp.qt_produto) 'quantidade vendida',
     SUM(pp.qt_produto * pr.preco) 'valor vendido'
@@ -81,16 +84,16 @@ JOIN
 JOIN 
     produto pr ON pp.fk_produto = pr.id_produto
 GROUP BY 
-    MONTH(p.dt_pedido)
+    MONTH(p.dt_pedido),pr.nome
 ORDER BY 
      MONTH(p.dt_pedido);
-SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;
-
+     
 
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
 AS
 SELECT 
+	pr.nome 'nome',
     DATE(p.dt_pedido) 'dia',
     SUM(pp.qt_produto) 'quantidade vendida',
     SUM(pp.qt_produto * pr.preco) 'Valor Vendido'
@@ -103,15 +106,20 @@ JOIN
 WHERE 
     P.dt_pedido >= CURDATE() - INTERVAL 7 DAY
 GROUP BY
-    DATE(p.dt_pedido)
+    DATE(p.dt_pedido),pr.nome
 ORDER BY
     DATE(p.dt_pedido);
+
+SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;
+    
+    
 
 SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;	
 -- view para quantidade vendida por valor vendido por dia
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_dia
 AS
 SELECT 
+	pr.nome 'nome',
     DATE(p.dt_pedido) 'dia',
     SUM(pp.qt_produto) 'quantidade vendida',
     SUM(pp.qt_produto * pr.preco) 'Valor Vendido'
@@ -123,9 +131,8 @@ JOIN
     produto pr ON pp.fk_produto = pr.id_produto
 WHERE
     P.dt_pedido >= CURDATE() - INTERVAL 1 DAY
-GROUP BY
-    DATE(p.dt_pedido);
+GROUP BY 
+	p.dt_pedido, pr.nome;
 
-
-SELECT * FROM produto;
+DESC metas;
 

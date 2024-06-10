@@ -121,7 +121,7 @@ CREATE TABLE festa(
 -- tabela metas
 CREATE TABLE metas(
     id_meta INT PRIMARY KEY AUTO_INCREMENT,
-    descricao VARCHAR(45),
+    valor DECIMAL(7,2),
     dt_termino DATE,
     dt_inicio DATE
 );
