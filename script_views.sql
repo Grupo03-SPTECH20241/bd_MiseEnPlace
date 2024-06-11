@@ -12,9 +12,6 @@ JOIN
 GROUP BY 
     MONTH(p.dt_pedido);
 
-SELECT * FROM vw_quantidade_vendidos_mes;
-
-UPDATE metas SET valor = 2000 WHERE id_meta = 1;
 
 -- view mais vendidos por dia 
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_dia
@@ -47,8 +44,6 @@ GROUP BY
 ORDER BY
 	DATE(p.dt_pedido);
 
-SELECT * FROM vw_quantidade_vendidos_semana;
-SELECT * FROM pedido;
 
 -- view mais vendidos por tipo de produto
 CREATE OR REPLACE VIEW vw_tipo_produto
@@ -110,7 +105,6 @@ GROUP BY
 ORDER BY
     DATE(p.dt_pedido);
 
-SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;
     
     
 
@@ -134,5 +128,5 @@ WHERE
 GROUP BY 
 	p.dt_pedido, pr.nome;
 
-DESC metas;
+
 

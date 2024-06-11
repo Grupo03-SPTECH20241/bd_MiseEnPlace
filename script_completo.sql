@@ -180,7 +180,9 @@ INSERT INTO tipo_produto ( tipo)
 VALUES 
     ('Bolo'),
     ('Doces'),
-    ('Salgados');
+    ('Salgados'),
+    ('pirulito'),
+    ('torta');
 
 -- Tabela `mydb`.`forma_entrega`
 INSERT INTO forma_entrega (forma_entrega) 
@@ -209,7 +211,7 @@ VALUES
 -- Tabela `mydb`.`metas`
 INSERT INTO metas (valor, dt_termino,  dt_inicio) 
 VALUES 
-    ( 5000, '2024-12-31',  '2024-01-01');
+    ( 50000, '2024-12-31',  '2024-01-01');
 
 -- Tabela `mydb`.`usuario`
 INSERT INTO usuario (nome,email, senha) 
@@ -293,3 +295,196 @@ $
 delimiter $
 	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
 $
+
+
+DELIMITER //
+
+CREATE PROCEDURE gerar_dados_teste()
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE tema VARCHAR(45);
+    DECLARE fk_recheio INT;
+    DECLARE fk_massa INT;
+    DECLARE fk_cobertura INT;
+    DECLARE observacoes VARCHAR(45);
+    DECLARE qt_produto INT;
+    DECLARE fk_produto INT;
+    DECLARE dt_pedido DATE;
+    DECLARE vl_pedido DECIMAL(6,2);
+    DECLARE status CHAR(1);
+    DECLARE valor_sinal DECIMAL(6,2);
+    DECLARE fk_forma_entrega INT;
+    DECLARE fk_cliente INT;
+    DECLARE fk_forma_pagamento INT;
+
+    WHILE i < 500 DO
+        SET tema = CONCAT('Tema ', FLOOR(1 + RAND() * 10)); -- Temas variados
+        SET fk_recheio = FLOOR(1 + RAND() * 3); -- 1 a 3
+        SET fk_massa = FLOOR(1 + RAND() * 3); -- 1 a 3
+        SET fk_cobertura = FLOOR(1 + RAND() * 3); -- 1 a 3
+        SET observacoes = CONCAT('Observação ', FLOOR(1 + RAND() * 100)); -- Observações variadas
+        SET qt_produto = FLOOR(1 + RAND() * 10); -- Quantidade de produtos entre 1 e 10
+        SET fk_produto = FLOOR(1 + RAND() * 4); -- 1 a 4
+        SET dt_pedido = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 160) DAY); -- Datas variadas nos últimos 160 dias
+        SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
+        SET status = 'P'; -- Status default
+        SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
+        SET fk_forma_entrega = FLOOR(1 + RAND() * 2); -- 1 a 2
+        SET fk_cliente = FLOOR(1 + RAND() * 2); -- 1 a 2
+        SET fk_forma_pagamento = FLOOR(1 + RAND() * 2); -- 1 a 2
+
+        CALL pc_insercao_pedido(
+            tema,
+            fk_recheio,
+            fk_massa,
+            fk_cobertura,
+            observacoes,
+            qt_produto,
+            fk_produto,
+            dt_pedido,
+            vl_pedido,
+            status,
+            valor_sinal,
+            fk_forma_entrega,
+            fk_cliente,
+            fk_forma_pagamento
+        );
+
+        SET i = i + 1;
+    END WHILE;
+
+END //
+
+DELIMITER ;
+
+call gerar_dados_teste();
+
+
+CREATE OR REPLACE VIEW  vw_quantidade_vendidos_mes
+AS
+SELECT 
+    MONTH(p.dt_pedido) 'mes',
+    SUM(pp.qt_produto) 'Quantidade Vendida'
+FROM 
+    pedido p
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+GROUP BY 
+    MONTH(p.dt_pedido);
+
+
+-- view mais vendidos por dia 
+CREATE OR REPLACE VIEW  vw_quantidade_vendidos_dia
+AS
+SELECT 
+    DAY(p.dt_pedido) 'dia',
+    SUM(pp.qt_produto) 'Quantidade Vendida'
+FROM 
+    pedido p
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+GROUP BY 
+    DAY(p.dt_pedido);
+
+desc vw_quantidade_vendidos_dia; 
+-- view mais vendidos por semana
+CREATE OR REPLACE VIEW  vw_quantidade_vendidos_semana
+AS
+SELECT 
+    DATE(p.dt_pedido) 'dia',
+    SUM(pp.qt_produto) 'quantidade Vendida'
+FROM 
+    pedido p
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+WHERE 
+	p.dt_pedido >= CURDATE() - INTERVAL 7 DAY
+GROUP BY 
+    DATE(p.dt_pedido)
+ORDER BY
+	DATE(p.dt_pedido);
+
+
+-- view mais vendidos por tipo de produto
+CREATE OR REPLACE VIEW vw_tipo_produto
+AS
+SELECT
+	tp.id_tipo_produto AS id,
+    tp.tipo AS Tipo_Produto,
+    SUM(pp.qt_produto) AS Quantidade_Vendida
+FROM 
+    produto_pedido pp
+JOIN 
+    produto p ON pp.fk_produto = p.id_produto
+JOIN 
+    tipo_produto tp ON p.fk_tipo_produto = tp.id_tipo_produto
+GROUP BY 
+    tp.id_tipo_produto
+ORDER BY 
+    SUM(pp.qt_produto) DESC;
+
+SELECT * FROM vw_tipo_produto;
+-- views quantidade para grafico de valor vendido por quantidade vendida(Por mês)
+CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido 
+AS
+SELECT 
+	pr.nome 'nome',
+    MONTH(p.dt_pedido) 'mes',
+    SUM(pp.qt_produto) 'quantidade vendida',
+    SUM(pp.qt_produto * pr.preco) 'valor vendido'
+FROM 
+    pedido p
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+JOIN 
+    produto pr ON pp.fk_produto = pr.id_produto
+GROUP BY 
+    MONTH(p.dt_pedido),pr.nome
+ORDER BY 
+     MONTH(p.dt_pedido);
+     
+
+
+-- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
+CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
+AS
+SELECT 
+	pr.nome 'nome',
+    DATE(p.dt_pedido) 'dia',
+    SUM(pp.qt_produto) 'quantidade vendida',
+    SUM(pp.qt_produto * pr.preco) 'Valor Vendido'
+FROM
+    pedido p 
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+JOIN
+    produto pr ON pp.fk_produto = pr.id_produto
+WHERE 
+    P.dt_pedido >= CURDATE() - INTERVAL 7 DAY
+GROUP BY
+    DATE(p.dt_pedido),pr.nome
+ORDER BY
+    DATE(p.dt_pedido);
+
+    
+    
+
+SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;	
+-- view para quantidade vendida por valor vendido por dia
+CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_dia
+AS
+SELECT 
+	pr.nome 'nome',
+    DATE(p.dt_pedido) 'dia',
+    SUM(pp.qt_produto) 'quantidade vendida',
+    SUM(pp.qt_produto * pr.preco) 'Valor Vendido'
+FROM
+    pedido p 
+JOIN 
+    produto_pedido pp ON p.id_pedido = pp.fk_pedido
+JOIN
+    produto pr ON pp.fk_produto = pr.id_produto
+WHERE
+    P.dt_pedido >= CURDATE() - INTERVAL 1 DAY
+GROUP BY 
+	p.dt_pedido, pr.nome;
