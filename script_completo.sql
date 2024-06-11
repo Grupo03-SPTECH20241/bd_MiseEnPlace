@@ -327,7 +327,7 @@ BEGIN
         SET fk_produto = FLOOR(1 + RAND() * 4); -- 1 a 4
         SET dt_pedido = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 160) DAY); -- Datas variadas nos últimos 160 dias
         SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
-        SET status = 'P'; -- Status default
+        SET status = 'a'; -- Status default
         SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
         SET fk_forma_entrega = FLOOR(1 + RAND() * 2); -- 1 a 2
         SET fk_cliente = FLOOR(1 + RAND() * 2); -- 1 a 2
