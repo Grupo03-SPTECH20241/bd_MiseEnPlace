@@ -101,7 +101,7 @@ VALUES
     ('Sem açúcar',1, 1, 1, 1),
     ('Com recheio duplo', 2, 2, 2, 2);
     
-    
+
     
 use bd_mise_en_place;
 Select * from usuario;

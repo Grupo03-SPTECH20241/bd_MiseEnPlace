@@ -82,12 +82,13 @@ GROUP BY
     MONTH(p.dt_pedido),pr.nome
 ORDER BY 
      MONTH(p.dt_pedido);
-     
+ 
+SELECT * FROM vw_quantidade_vendida_valor_vendido;
 
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
 AS
-SELECT 
+SELECT 	
 	pr.nome 'nome',
     DATE(p.dt_pedido) 'dia',
     SUM(pp.qt_produto) 'quantidade vendida',
@@ -105,10 +106,6 @@ GROUP BY
 ORDER BY
     DATE(p.dt_pedido);
 
-    
-    
-
-SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;	
 -- view para quantidade vendida por valor vendido por dia
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_dia
 AS

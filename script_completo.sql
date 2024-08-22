@@ -205,8 +205,8 @@ VALUES
 -- Tabela `mydb`.`pedido`
 INSERT INTO pedido (dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
 VALUES 
-    (NOW(), '50.00', 'P', '20.00', 1, 1, 1),
-    ('2024-05-12', '100.00', 'A', '30.00', 2, 2, 2);
+    (NOW(), '50.00', 'N', '20.00', 1, 1, 1),
+    ('2024-05-12', '100.00', 'N', '30.00', 2, 2, 2);
    
 -- Tabela `mydb`.`metas`
 INSERT INTO metas (valor, dt_termino,  dt_inicio) 
@@ -293,7 +293,7 @@ END
 $
 
 delimiter $
-	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),50.00,'P',25.00,1,1,1);
+	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),50.00,'N',25.00,1,1,1);
 $
 
 
@@ -317,8 +317,8 @@ BEGIN
     DECLARE fk_cliente INT;
     DECLARE fk_forma_pagamento INT;
 
-    WHILE i < 500 DO
-        SET tema = CONCAT('Tema ', FLOOR(1 + RAND() * 10)); -- Temas variados
+    WHILE i < 15 DO
+        SET tema = CONCAT('Tema ', FLOOR(1 + RAND() * 10)); -- Temas variadosA
         SET fk_recheio = FLOOR(1 + RAND() * 3); -- 1 a 3
         SET fk_massa = FLOOR(1 + RAND() * 3); -- 1 a 3
         SET fk_cobertura = FLOOR(1 + RAND() * 3); -- 1 a 3
@@ -327,7 +327,7 @@ BEGIN
         SET fk_produto = FLOOR(1 + RAND() * 4); -- 1 a 4
         SET dt_pedido = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 160) DAY); -- Datas variadas nos últimos 160 dias
         SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
-        SET status = 'a'; -- Status default
+        SET status = 'N'; -- Status default
         SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
         SET fk_forma_entrega = FLOOR(1 + RAND() * 2); -- 1 a 2
         SET fk_cliente = FLOOR(1 + RAND() * 2); -- 1 a 2
@@ -359,6 +359,7 @@ DELIMITER ;
 
 call gerar_dados_teste();
 
+SELECT * FROM pedido;
 
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_mes
 AS
