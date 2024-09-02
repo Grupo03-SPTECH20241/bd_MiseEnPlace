@@ -90,6 +90,7 @@ CREATE TABLE cliente(
 CREATE TABLE pedido(
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     dt_pedido DATE,
+    dt_entrega DATE,
     vl_pedido DECIMAL(6,2),
     status CHAR(1),
     valor_sinal DECIMAL(6,2),

@@ -89,6 +89,7 @@ CREATE TABLE cliente(
 CREATE TABLE pedido(
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     dt_pedido DATE,
+    dt_entrega DATE,
     vl_pedido DECIMAL(6,2),
     status CHAR(1),
     valor_sinal DECIMAL(6,2),
@@ -203,10 +204,10 @@ VALUES
     ('Dinheiro');
 
 -- Tabela `mydb`.`pedido`
-INSERT INTO pedido (dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
+INSERT INTO pedido (dt_pedido,dt_entrega, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
 VALUES 
-    (NOW(), '50.00', 'N', '20.00', 1, 1, 1),
-    ('2024-05-12', '100.00', 'N', '30.00', 2, 2, 2);
+    (NOW(),'2024-09-12', '50.00', 'N', '20.00', 1, 1, 1),
+    ('2024-05-12','2024-09-12', '100.00', 'N', '30.00', 2, 2, 2);
    
 -- Tabela `mydb`.`metas`
 INSERT INTO metas (valor, dt_termino,  dt_inicio) 
@@ -262,6 +263,7 @@ CREATE  PROCEDURE pc_insercao_pedido(
     qt_produto INT,
     fk_produto INT,
     dt_pedido DATE, -- Tabela pedido
+    dt_entrega DATE,
     vl_pedido DECIMAL(6,2),
 	`status` CHAR(1),
     valor_sinal DECIMAL(6,2),
@@ -273,9 +275,9 @@ CREATE  PROCEDURE pc_insercao_pedido(
 								VALUES 
 								(tema, fk_recheio, fk_massa, fk_cobertura);
 	
-    INSERT INTO pedido(dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
+    INSERT INTO pedido(dt_pedido,dt_entrega, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento) 
 								VALUES 
-								(dt_pedido, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento);
+								(dt_pedido,dt_entrega, vl_pedido, status, valor_sinal, fk_forma_entrega, fk_cliente, fk_forma_pagamento);
     
 	INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao, fk_pedido) 
 								VALUES 
@@ -293,7 +295,7 @@ END
 $
 
 delimiter $
-	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),50.00,'N',25.00,1,1,1);
+	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
 $
 
 
@@ -310,6 +312,7 @@ BEGIN
     DECLARE qt_produto INT;
     DECLARE fk_produto INT;
     DECLARE dt_pedido DATE;
+    DECLARE dt_entrega DATE;
     DECLARE vl_pedido DECIMAL(6,2);
     DECLARE status CHAR(1);
     DECLARE valor_sinal DECIMAL(6,2);
@@ -326,6 +329,7 @@ BEGIN
         SET qt_produto = FLOOR(1 + RAND() * 10); -- Quantidade de produtos entre 1 e 10
         SET fk_produto = FLOOR(1 + RAND() * 4); -- 1 a 4
         SET dt_pedido = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 160) DAY); -- Datas variadas nos últimos 160 dias
+        SET	dt_entrega = DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 30) DAY);
         SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
         SET status = 'N'; -- Status default
         SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
@@ -342,6 +346,7 @@ BEGIN
             qt_produto,
             fk_produto,
             dt_pedido,
+            dt_entrega,
             vl_pedido,
             status,
             valor_sinal,
@@ -357,7 +362,10 @@ END //
 
 DELIMITER ;
 
+
 call gerar_dados_teste();
+
+
 
 SELECT * FROM pedido;
 
@@ -489,3 +497,5 @@ WHERE
     P.dt_pedido >= CURDATE() - INTERVAL 1 DAY
 GROUP BY 
 	p.dt_pedido, pr.nome;
+    
+    SELECT * FROM pedido;
