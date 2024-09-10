@@ -1,0 +1,15 @@
+ARG MYSQL_VERSION=5.7
+
+FROM mysql:${MYSQL_VERSION}
+
+WORKDIR /usr/bd
+
+ENV MYSQL_ROOT_PASSWORD=urubu100
+ENV MYSQL_DATABASE=bd_mise_en_place
+ENV MYSQL_USER=Aluno
+ENV MYSQL_PASSWORD=urubu100
+
+COPY ./ ./docker-entrypoint-initdb.d
+
+EXPOSE 3306
+
