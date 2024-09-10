@@ -241,12 +241,13 @@ VALUES
 -- Inserindo valores na tabela produto
 INSERT INTO produto ( nome, preco, descricao, foto, qtd_disponivel, fk_recheio, fk_massa, fk_cobertura, fk_unidade_medida, fk_tipo_produto) 
 VALUES 
-    ('Bolo de Chocolate', 30.00, 'Delicioso bolo de chocolate', '../../utils/img/produtos/bolo_chocolate.jpg', 10, 1, 1, 1, 1, 1),
-    ( 'Bolo de Baunilha', 25.00, 'Bolo de baunilha simples e delicioso', 'bolo_baunilha.jpg', 15, 2, 2, 1, 1, 1),
-    ('Brigadeiro', 2.50, 'Doce de brigadeiro tradicional', 'brigadeiro.jpg', 100, 1, 1, 1, 1, 2),
-    ('Coxinha', 3.00, 'Coxinha de frango', 'coxinha.jpg', 50, 1, 1, 1, 1, 3);
+    ('Bolo de Chocolate', 30.00, 'Delicioso bolo de chocolate', 'img/produtos/bolo_chocolate.jpg', 10, 1, 1, 1, 1, 1),
+    ( 'Bolo de Baunilha', 25.00, 'Bolo de baunilha simples e delicioso', 'img/produtos/bolo-baunilha.jpg', 15, 2, 2, 1, 1, 1),
+    ('Brigadeiro', 2.50, 'Doce de brigadeiro tradicional', 'img/produtos/brigadeiro.jpg', 100, 1, 1, 1, 1, 2),
+    ('Coxinha', 3.00, 'Coxinha de frango', 'img/produtos/coxinha.jpg', 50, 1, 1, 1, 1, 3);
+UPDATE produto SET foto = 'img/produtos/coxinha.jpg' WHERE id_produto = 4;
+select * from produto;	
 
-UPDATE produto SET foto = '../../utils/img/produtos/bolo_chocolate.jpg' WHERE id_produto = 1;
 
 USE bd_mise_en_place;
 SELECT * FROM produto;
