@@ -1,7 +1,11 @@
 DROP DATABASE IF EXISTS bd_mise_en_place;
 
 CREATE DATABASE bd_mise_en_place;
-USE bd_mise_en_place;
+USE bd_mise_en_place
+
+;
+
+SELECT * FROM usuario;
 
 -- Tabela tipo produto
 CREATE TABLE tipo_produto(

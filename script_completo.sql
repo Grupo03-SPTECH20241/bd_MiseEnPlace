@@ -257,7 +257,7 @@ VALUES
     ('Sem açúcar',1, 1, 1, 1),
     ('Com recheio duplo', 2, 2, 2, 2);
     
-DELIMITER $
+DELIMITER //
 CREATE  PROCEDURE pc_insercao_pedido(
 	IN 
     tema VARCHAR(45),
@@ -297,11 +297,14 @@ CREATE  PROCEDURE pc_insercao_pedido(
 	
                                 
 END
-$
+ 
+ DELIMITER ;
 
-delimiter $
-	CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
-$
+USE bd_mise_en_place;    
+    CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
+
+
+
 
 
 DELIMITER //
@@ -504,3 +507,4 @@ GROUP BY
 	p.dt_pedido, pr.nome;
     
     SELECT * FROM pedido;
+    drop database bd_mise_en_place;
