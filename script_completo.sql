@@ -189,7 +189,8 @@ VALUES
 INSERT INTO forma_entrega (forma_entrega) 
 VALUES 
     ('Retirada'),
-    ('Entrega');
+    ('Entrega'),
+    ('Serviço em festa');
 
 -- Tabela `mydb`.`cliente`
 INSERT INTO cliente (nome, numero) 
@@ -246,11 +247,7 @@ VALUES
     ('Brigadeiro', 2.50, 'Doce de brigadeiro tradicional', 'img/produtos/brigadeiro.jpg', 100, 1, 1, 1, 1, 2),
     ('Coxinha', 3.00, 'Coxinha de frango', 'img/produtos/coxinha.jpg', 50, 1, 1, 1, 1, 3);
 UPDATE produto SET foto = 'img/produtos/coxinha.jpg' WHERE id_produto = 4;
-select * from produto;	
 
-
-USE bd_mise_en_place;
-SELECT * FROM produto;
 -- Tabela produto_pedido
 INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao, fk_pedido) 
 VALUES 
@@ -484,10 +481,7 @@ GROUP BY
 ORDER BY
     DATE(p.dt_pedido);
 
-    
-    
 
-SELECT * FROM vw_quantidade_vendida_valor_vendido_semana;	
 -- view para quantidade vendida por valor vendido por dia
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_dia
 AS
