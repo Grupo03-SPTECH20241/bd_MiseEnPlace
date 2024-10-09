@@ -444,7 +444,8 @@ SELECT * FROM vw_tipo_produto;
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por mês)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido 
 AS
-SELECT 
+SELECT
+	ROW_NUMBER() OVER (ORDER BY MONTH(p.dt_pedido)) as id_quantidade,
 	pr.nome 'nome',
     MONTH(p.dt_pedido) 'mes',
     SUM(pp.qt_produto) 'quantidade vendida',
