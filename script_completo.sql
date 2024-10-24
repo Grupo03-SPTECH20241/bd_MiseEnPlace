@@ -298,6 +298,12 @@ $
 
 CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
 
+
+DELIMITER $
+	DROP PROCEDURE gerar_dados_teste;
+$
+
+
 DELIMITER //
 
 CREATE PROCEDURE gerar_dados_teste(
@@ -334,9 +340,10 @@ BEGIN
         SET	dt_entrega = DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 30) DAY);
         SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
 		SET status = CASE 
-			WHEN i <= (quantidade/2)
-			THEN status = 'N' 
-			ELSE status = 'E' END;
+			WHEN i <= (quantidade/2) 
+			THEN 'N' 
+			ELSE 'E' 
+		END;
         SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
         SET fk_forma_entrega = FLOOR(1 + RAND() * 2); -- 1 a 2
         SET fk_cliente = FLOOR(1 + RAND() * 2); -- 1 a 2
