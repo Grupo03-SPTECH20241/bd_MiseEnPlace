@@ -81,8 +81,7 @@ CREATE TABLE forma_pagamento(
 CREATE TABLE cliente(
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
-    numero CHAR(11),
-    dt_aniversario DATE
+    numero CHAR(11)
 );
 
 -- tabela pedido
