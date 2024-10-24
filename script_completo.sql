@@ -299,9 +299,6 @@ $
 CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
 
 
-DELIMITER $
-	DROP PROCEDURE gerar_dados_teste;
-$
 
 
 DELIMITER //
