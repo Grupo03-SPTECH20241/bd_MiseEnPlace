@@ -220,7 +220,6 @@ VALUES
     ('João','joao@example.com', 'senha123'),
     ('Maria','maria@example.com', 'senha456');
   
-
 -- Tabela `mydb`.`personalizacao`
 INSERT INTO personalizacao (tema, fk_recheio, fk_massa, fk_cobertura) 
 VALUES 
@@ -451,14 +450,15 @@ FROM
 JOIN 
     produto_pedido pp ON p.id_pedido = pp.fk_pedido
 JOIN 
-    produto pr ON pp.fk_produto = pr.id_produto
+    produto pr ON pp.fk_produto = pr.id_produto    
+AND p.status = 'E'
 GROUP BY 
     MONTH(p.dt_pedido),pr.nome
 ORDER BY 
      MONTH(p.dt_pedido);
      
 
-
+USE bd_mise_en_place;
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
 AS
