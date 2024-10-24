@@ -298,13 +298,12 @@ $
 
 CALL pc_insercao_pedido(NULL,1,2,3,'Sem açúcar',56,2,CURRENT_DATE(),'2024-09-23',50.00,'N',25.00,1,1,1);
 
-
-
-
-
 DELIMITER //
 
-CREATE PROCEDURE gerar_dados_teste()
+CREATE PROCEDURE gerar_dados_teste(
+	IN
+    quantidade INT
+)
 BEGIN
     DECLARE i INT DEFAULT 0;
     DECLARE tema VARCHAR(45);
@@ -322,8 +321,8 @@ BEGIN
     DECLARE fk_forma_entrega INT;
     DECLARE fk_cliente INT;
     DECLARE fk_forma_pagamento INT;
-
-    WHILE i < 15 DO
+    
+    WHILE i < quantidade DO
         SET tema = CONCAT('Tema ', FLOOR(1 + RAND() * 10)); -- Temas variadosA
         SET fk_recheio = FLOOR(1 + RAND() * 3); -- 1 a 3
         SET fk_massa = FLOOR(1 + RAND() * 3); -- 1 a 3
@@ -334,7 +333,10 @@ BEGIN
         SET dt_pedido = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 160) DAY); -- Datas variadas nos últimos 160 dias
         SET	dt_entrega = DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 30) DAY);
         SET vl_pedido = ROUND(RAND() * 100 + 50, 2); -- Valor do pedido entre 50 e 150
-        SET status = 'N'; -- Status default
+		SET status = CASE 
+			WHEN i <= (quantidade/2)
+			THEN status = 'N' 
+			ELSE status = 'E' END;
         SET valor_sinal = ROUND(RAND() * 50, 2); -- Valor do sinal entre 0 e 50
         SET fk_forma_entrega = FLOOR(1 + RAND() * 2); -- 1 a 2
         SET fk_cliente = FLOOR(1 + RAND() * 2); -- 1 a 2
@@ -366,7 +368,8 @@ END //
 DELIMITER ;
 
 
-call gerar_dados_teste();
+call gerar_dados_teste(200);
+
 
 
 
@@ -457,7 +460,6 @@ GROUP BY
 ORDER BY 
      MONTH(p.dt_pedido);
      
-
 USE bd_mise_en_place;
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
