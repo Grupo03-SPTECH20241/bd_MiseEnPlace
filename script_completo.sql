@@ -508,3 +508,7 @@ GROUP BY
     
     SELECT * FROM pedido;
     -- drop database bd_mise_en_place;
+    
+    USE bd_mise_en_place;
+SELECT * FROM produto_pedido;
+SELECT * FROM pedido;
