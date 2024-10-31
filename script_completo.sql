@@ -38,7 +38,7 @@ CREATE TABLE produto(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
     preco DECIMAL(6,2),
-    descricao VARCHAR(45),
+    descricao VARCHAR(455),
     foto VARCHAR(300),
     qtd_disponivel INT,
     fk_recheio INT,
@@ -244,7 +244,43 @@ VALUES
     ( 'Bolo de Baunilha', 25.00, 'Bolo de baunilha simples e delicioso', 'img/produtos/bolo-baunilha.jpg', 15, 2, 2, 1, 1, 1),
     ('Brigadeiro', 2.50, 'Doce de brigadeiro tradicional', 'img/produtos/brigadeiro.jpg', 100, 1, 1, 1, 1, 2),
     ('Coxinha', 3.00, 'Coxinha de frango', 'img/produtos/coxinha.jpg', 50, 1, 1, 1, 1, 3);
-UPDATE produto SET foto = 'img/produtos/coxinha.jpg' WHERE id_produto = 4;
+INSERT INTO produto (nome, preco, descricao, foto, qtd_disponivel, fk_recheio, fk_massa, fk_cobertura, fk_unidade_medida, fk_tipo_produto) 
+VALUES 
+    -- Produtos do tipo 'Bolo'
+    ('Bolo de Morango', 35.00, 'Delicioso bolo com recheio de morango', 'img/produtos/bolo_morango.jpg', 12, 3, 1, 2, 1, 1),
+    ('Bolo de Nozes', 40.00, 'Bolo com cobertura de creme de leite e recheio de nozes', 'img/produtos/bolo_nozes.jpg', 8, 2, 3, 1, 1, 1),
+    ('Bolo de Cenoura', 32.00, 'Bolo de cenoura com cobertura de ganache', 'img/produtos/bolo_cenoura.jpg', 10, 1, 2, 3, 1, 1),
+    ('Bolo de Coco', 38.00, 'Bolo de coco com recheio cremoso', 'img/produtos/bolo_coco.jpg', 7, 2, 1, 2, 1, 1),
+    ('Bolo de Limão', 30.00, 'Bolo de limão com cobertura açucarada', 'img/produtos/bolo_limao.jpg', 6, 3, 3, 1, 1, 1),
+
+    -- Produtos do tipo 'Doces'
+    ('Brigadeiro Gourmet', 3.50, 'Brigadeiro feito com chocolate belga', 'img/produtos/brigadeiro_gourmet.jpg', 100, 1, 1, 1, 1, 2),
+    ('Beijinho', 3.00, 'Doce de coco tradicional', 'img/produtos/beijinho.jpg', 90, 2, 1, 2, 1, 2),
+    ('Cajuzinho', 3.00, 'Doce feito com amendoim', 'img/produtos/cajuzinho.jpg', 85, 3, 1, 1, 1, 2),
+    ('Trufa de Maracujá', 4.00, 'Trufa recheada de maracujá', 'img/produtos/trufa_maracuja.jpg', 70, 1, 1, 3, 1, 2),
+    ('Doce de Leite', 2.50, 'Doce de leite caseiro', 'img/produtos/doce_de_leite.jpg', 120, 3, 1, 2, 1, 2),
+
+    -- Produtos do tipo 'Salgados'
+    ('Coxinha de Frango', 3.00, 'Coxinha tradicional de frango', 'img/produtos/coxinha_frango.jpg', 50, 1, 1, 1, 1, 3),
+    ('Bolinho de Queijo', 3.00, 'Bolinho recheado de queijo', 'img/produtos/bolinho_queijo.jpg', 40, 2, 1, 2, 1, 3),
+    ('Esfirra de Carne', 4.00, 'Esfirra aberta de carne', 'img/produtos/esfirra_carne.jpg', 35, 3, 1, 1, 1, 3),
+    ('Kibe', 3.50, 'Kibe frito com recheio de carne', 'img/produtos/kibe.jpg', 60, 1, 1, 3, 1, 3),
+    ('Enroladinho de Salsicha', 2.50, 'Massa recheada com salsicha', 'img/produtos/enroladinho_salsicha.jpg', 75, 2, 1, 2, 1, 3),
+
+    -- Produtos do tipo 'Pirulito'
+    ('Pirulito de Chocolate', 5.00, 'Pirulito feito com chocolate ao leite', 'img/produtos/pirulito_chocolate.jpg', 50, 1, 1, 1, 1, 4),
+    ('Pirulito de Brigadeiro', 5.50, 'Pirulito recheado de brigadeiro', 'img/produtos/pirulito_brigadeiro.jpg', 40, 1, 1, 2, 1, 4),
+    ('Pirulito de Morango', 5.00, 'Pirulito de morango coberto de chocolate', 'img/produtos/pirulito_morango.jpg', 45, 3, 1, 3, 1, 4),
+    ('Pirulito de Coco', 4.50, 'Pirulito de coco com cobertura açucarada', 'img/produtos/pirulito_coco.jpg', 30, 2, 1, 2, 1, 4),
+    ('Pirulito de Amendoim', 4.00, 'Pirulito de amendoim coberto de chocolate', 'img/produtos/pirulito_amendoim.jpg', 25, 3, 1, 1, 1, 4),
+
+    -- Produtos do tipo 'Torta'
+    ('Torta de Limão', 25.00, 'Torta com recheio de limão', 'img/produtos/torta_limao.jpg', 15, 3, 1, 2, 1, 5),
+    ('Torta de Chocolate', 27.50, 'Torta recheada de chocolate', 'img/produtos/torta_chocolate.jpg', 10, 1, 1, 3, 1, 5),
+    ('Torta de Morango', 30.00, 'Torta com morangos frescos', 'img/produtos/torta_morango.jpg', 12, 3, 1, 1, 1, 5),
+    ('Torta de Nozes', 28.00, 'Torta de nozes com cobertura de creme', 'img/produtos/torta_nozes.jpg', 8, 2, 1, 2, 1, 5),
+    ('Torta de Maçã', 26.50, 'Torta caseira de maçã', 'img/produtos/torta_maca.jpg', 7, 3, 1, 3, 1, 5);
+
 
 -- Tabela produto_pedido
 INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao, fk_pedido) 
@@ -371,13 +407,7 @@ END //
 
 DELIMITER ;
 
-
-call gerar_dados_teste(200);
-
-
-
-
-SELECT * FROM pedido;
+call gerar_dados_teste(1500);
 
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_mes
 AS
@@ -442,7 +472,6 @@ GROUP BY
 ORDER BY 
     SUM(pp.qt_produto) DESC;
 
-SELECT * FROM vw_tipo_produto;
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por mês)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido 
 AS
@@ -464,7 +493,7 @@ GROUP BY
 ORDER BY 
      MONTH(p.dt_pedido);
      
-USE bd_mise_en_place;
+
 -- views quantidade para grafico de valor vendido por quantidade vendida(Por semana)
 CREATE OR REPLACE VIEW vw_quantidade_vendida_valor_vendido_semana
 AS
@@ -506,9 +535,3 @@ WHERE
 GROUP BY 
 	p.dt_pedido, pr.nome;
     
-    SELECT * FROM pedido;
-    -- drop database bd_mise_en_place;
-    
-    USE bd_mise_en_place;
-SELECT * FROM produto_pedido;
-SELECT * FROM pedido;
