@@ -261,26 +261,19 @@ VALUES
     ('Doce de Leite', 2.50, 'Doce de leite caseiro', 'img/produtos/doce_de_leite.jpg', 120, 3, 1, 2, 1, 2),
 
     -- Produtos do tipo 'Salgados'
-    ('Coxinha de Frango', 3.00, 'Coxinha tradicional de frango', 'img/produtos/coxinha_frango.jpg', 50, 1, 1, 1, 1, 3),
     ('Bolinho de Queijo', 3.00, 'Bolinho recheado de queijo', 'img/produtos/bolinho_queijo.jpg', 40, 2, 1, 2, 1, 3),
     ('Esfirra de Carne', 4.00, 'Esfirra aberta de carne', 'img/produtos/esfirra_carne.jpg', 35, 3, 1, 1, 1, 3),
     ('Kibe', 3.50, 'Kibe frito com recheio de carne', 'img/produtos/kibe.jpg', 60, 1, 1, 3, 1, 3),
     ('Enroladinho de Salsicha', 2.50, 'Massa recheada com salsicha', 'img/produtos/enroladinho_salsicha.jpg', 75, 2, 1, 2, 1, 3),
-
-    -- Produtos do tipo 'Pirulito'
-    ('Pirulito de Chocolate', 5.00, 'Pirulito feito com chocolate ao leite', 'img/produtos/pirulito_chocolate.jpg', 50, 1, 1, 1, 1, 4),
-    ('Pirulito de Brigadeiro', 5.50, 'Pirulito recheado de brigadeiro', 'img/produtos/pirulito_brigadeiro.jpg', 40, 1, 1, 2, 1, 4),
-    ('Pirulito de Morango', 5.00, 'Pirulito de morango coberto de chocolate', 'img/produtos/pirulito_morango.jpg', 45, 3, 1, 3, 1, 4),
-    ('Pirulito de Coco', 4.50, 'Pirulito de coco com cobertura açucarada', 'img/produtos/pirulito_coco.jpg', 30, 2, 1, 2, 1, 4),
-    ('Pirulito de Amendoim', 4.00, 'Pirulito de amendoim coberto de chocolate', 'img/produtos/pirulito_amendoim.jpg', 25, 3, 1, 1, 1, 4),
 
     -- Produtos do tipo 'Torta'
     ('Torta de Limão', 25.00, 'Torta com recheio de limão', 'img/produtos/torta_limao.jpg', 15, 3, 1, 2, 1, 5),
     ('Torta de Chocolate', 27.50, 'Torta recheada de chocolate', 'img/produtos/torta_chocolate.jpg', 10, 1, 1, 3, 1, 5),
     ('Torta de Morango', 30.00, 'Torta com morangos frescos', 'img/produtos/torta_morango.jpg', 12, 3, 1, 1, 1, 5),
     ('Torta de Nozes', 28.00, 'Torta de nozes com cobertura de creme', 'img/produtos/torta_nozes.jpg', 8, 2, 1, 2, 1, 5),
-    ('Torta de Maçã', 26.50, 'Torta caseira de maçã', 'img/produtos/torta_maca.jpg', 7, 3, 1, 3, 1, 5);
-
+    ('Torta de Maçã', 26.50, 'Torta caseira de maçã', 'img/produtos/torta_maca.jpg', 7, 3, 1, 3, 1, 5),
+	-- Pirulitos
+	('Pirulito de Chocolate', 5.00, 'Pirulito feito com chocolate ao leite', 'img/produtos/pirulito_chocolate.jpg', 50, 1, 1, 1, 1, 4);
 
 -- Tabela produto_pedido
 INSERT INTO produto_pedido(observacoes, qt_produto, fk_produto,fk_personalizacao, fk_pedido) 
@@ -535,3 +528,6 @@ WHERE
 GROUP BY 
 	p.dt_pedido, pr.nome;
     
+    
+    
+SELECT * FROM produto;
