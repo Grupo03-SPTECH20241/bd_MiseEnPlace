@@ -500,7 +500,7 @@ JOIN
 JOIN
     produto pr ON pp.fk_produto = pr.id_produto
 WHERE 
-    P.dt_pedido >= CURDATE() - INTERVAL 7 DAY
+    p.dt_pedido >= CURDATE() - INTERVAL 7 DAY
 GROUP BY
     DATE(p.dt_pedido),pr.nome
 ORDER BY
