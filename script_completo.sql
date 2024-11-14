@@ -398,7 +398,7 @@ END //
 
 DELIMITER ;
 
-call gerar_dados_teste(1500);
+call gerar_dados_teste(10);
 
 CREATE OR REPLACE VIEW  vw_quantidade_vendidos_mes
 AS
@@ -522,10 +522,9 @@ JOIN
 JOIN
     produto pr ON pp.fk_produto = pr.id_produto
 WHERE
-    P.dt_pedido >= CURDATE() - INTERVAL 1 DAY
+    p.dt_pedido >= CURDATE() - INTERVAL 1 DAY
 GROUP BY 
 	p.dt_pedido, pr.nome;
     
     
-    
-SELECT * FROM produto;
+
