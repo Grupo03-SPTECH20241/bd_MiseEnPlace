@@ -150,6 +150,7 @@ CREATE TABLE produto_pedido(
 
 INSERT INTO recheio ( nome, preco) 
 VALUES 
+    ('N/A', 0),
     ('Chocolate', 5.99),
     ('Baunilha', 4.50),
     ('Morango', 6.75);
@@ -157,6 +158,7 @@ VALUES
 -- Tabela `mydb`.`massa`
 INSERT INTO massa (nome) 
 VALUES 
+    ('N/A'),
     ('Chocolate'),
     ('Baunilha'),
     ('Red Velvet');
@@ -164,6 +166,7 @@ VALUES
 -- Tabela `mydb`.`cobertura`
 INSERT INTO cobertura (nome) 
 VALUES 
+    ('N/A'),
     ('Chocolate'),
     ('Creme de Leite'),
     ('Ganache');
